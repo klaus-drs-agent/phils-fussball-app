@@ -215,6 +215,11 @@ body {
     font-weight: 700;
 }
 
+.info-card.daily-fact p {
+    color: white;
+    font-weight: 400;
+}
+
 .info-card h4 {
     font-size: 1rem;
     margin-bottom: 0.6rem;
@@ -241,6 +246,7 @@ body {
     color: rgba(255, 255, 255, 0.9);
     text-align: center;
     padding: 1rem;
+    padding-bottom: 90px;
     font-size: 0.85rem;
     line-height: 1.4;
     margin-top: auto;
