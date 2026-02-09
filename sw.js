@@ -1,9 +1,8 @@
-const CACHE_NAME = 'phils-fussball-app-v1';
+const CACHE_NAME = 'phils-fussball-app-v2';
 const urlsToCache = [
   '/',
   '/index.html',
   '/style.css',
-  '/app.js',
   '/manifest.json',
   'https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap'
 ];
