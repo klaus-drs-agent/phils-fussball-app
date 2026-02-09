@@ -16,7 +16,12 @@ const bayernFacts = [
     "Bayern hat mehr als 300.000 Mitglieder - größter Sportverein der Welt!",
     "Oliver Kahn hielt 2001/02 in 15 CL-Spielen nur 3 Gegentore - legendär!",
     "Das Triple 2013 und 2020 - nur Bayern schaffte es zweimal!",
-    "Gerd Müller erzielte 365 Bundesliga-Tore - bis heute unübertroffen (Tore pro Spiel)."
+    "Gerd Müller erzielte 365 Bundesliga-Tore - bis heute unübertroffen (Tore pro Spiel).",
+    "Die Allianz Arena kostete 340 Millionen Euro und wurde 2005 eröffnet.",
+    "Bayern München gewann 2013 alle sechs möglichen Titel in einem Jahr.",
+    "Thomas Müller hält den Rekord für die meisten Vorlagen in einer Bundesliga-Saison: 21!",
+    "Die Südkurve der Allianz Arena fasst über 20.000 Stehplätze.",
+    "Bayern ist der einzige deutsche Club, der nie aus der Bundesliga abgestiegen ist - seit 1965!"
 ];
 
 // Phil Foden Daily Facts
@@ -30,76 +35,105 @@ const fodenFacts = [
     "Phil Foden gewann 2023 mit City das historische Treble (Premier League, FA Cup, Champions League).",
     "Er kann auf 6 Positionen spielen - von Links außen bis Zentrales Mittelfeld.",
     "Foden ist der erste Spieler, der in allen 4 englischen Top-Wettbewerben in einer Saison traf.",
-    "Seine Trikotnummer 47 trägt er seit der Jugend - Glückszahl!"
+    "Seine Trikotnummer 47 trägt er seit der Jugend - Glückszahl!",
+    "Phil Foden erzielte sein erstes Profi-Tor im Alter von 17 Jahren gegen Feyenoord.",
+    "Er ist der jüngste englische Torschütze in der Champions League Geschichte.",
+    "Foden gewann bereits 5x die Premier League mit Manchester City.",
+    "Seine Passgenauigkeit liegt konstant über 90% - ein Wert auf Weltklasse-Niveau.",
+    "Phil wurde 2024 zum Premier League Player of the Season gewählt."
 ];
 
-// Bayern München News (Dummy Data)
-const bayernNews = [
-    {
-        icon: "⚽",
-        title: "Bayern siegt 3:1 gegen Augsburg",
-        text: "Souveräner Heimsieg in der Allianz Arena. Kane mit Doppelpack.",
-        url: "https://fcbayern.com"
-    },
-    {
-        icon: "🏆",
-        title: "Neuer verlängert Vertrag bis 2026",
-        text: "Kapitän Manuel Neuer bleibt dem Rekordmeister langfristig erhalten.",
-        url: "https://fcbayern.com"
-    },
-    {
-        icon: "📰",
-        title: "Tuchel plant Rotation für Champions League",
-        text: "Trainer will gegen PSG auf frische Kräfte setzen.",
-        url: "https://fcbayern.com"
-    },
-    {
-        icon: "👕",
-        title: "Neues Trikot für Saison 2026/27 vorgestellt",
-        text: "Modernes Design in klassischem Rot-Weiß mit goldenen Akzenten.",
-        url: "https://fcbayern.com"
-    },
-    {
-        icon: "🎯",
-        title: "Transfer-Gerüchte: Bayern an Youngster interessiert",
-        text: "Laut Medienberichten soll ein 18-jähriges Talent beobachtet werden.",
-        url: "https://fcbayern.com"
-    }
-];
+// Random Fact Selection
+let currentBayernFactIndex = 0;
+let currentFodenFactIndex = 0;
 
-// Phil Foden News (Dummy Data)
-const fodenNews = [
-    {
-        icon: "⭐",
-        title: "Foden glänzt bei City-Sieg",
-        text: "Zwei Tore und eine Vorlage gegen Arsenal - Mann des Spiels!",
-        url: "https://mancity.com"
-    },
-    {
-        icon: "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
-        title: "England-Nominierung bestätigt",
-        text: "Foden ist Teil des Kaders für die anstehenden Länderspiele.",
-        url: "https://mancity.com"
-    },
-    {
-        icon: "💬",
-        title: "Guardiola lobt Foden nach Gala-Vorstellung",
-        text: "Der Trainer schwärmt von der Entwicklung seines Schützlings.",
-        url: "https://mancity.com"
-    },
-    {
-        icon: "📊",
-        title: "Foden führt City-Statistik an",
-        text: "Die meisten Scorerpunkte aller Premier-League-Spieler im Februar.",
-        url: "https://mancity.com"
-    },
-    {
-        icon: "🎥",
-        title: "Interview: Foden über seine Ziele",
-        text: "Der Mittelfeldstar spricht über Ambitionen für die Saison.",
-        url: "https://mancity.com"
-    }
-];
+function getRandomFact(factsArray, currentIndex) {
+    let newIndex;
+    do {
+        newIndex = Math.floor(Math.random() * factsArray.length);
+    } while (newIndex === currentIndex && factsArray.length > 1);
+    return { fact: factsArray[newIndex], index: newIndex };
+}
+
+// Dynamic News Generation (simulated - würde im echten Szenario via API laufen)
+function generateBayernNews() {
+    const templates = [
+        { icon: "⚽", title: "Bayern gewinnt {score} gegen {team}", text: "Souveräner Heimsieg in der Allianz Arena. {player} mit starker Leistung.", url: "https://fcbayern.com/de/news" },
+        { icon: "🏆", title: "{player} verlängert Vertrag bis {year}", text: "Der Verein freut sich über die langfristige Bindung des Leistungsträgers.", url: "https://fcbayern.com/de/news" },
+        { icon: "📰", title: "Tuchel plant {tactic} für {competition}", text: "Der Trainer setzt auf {strategy} im wichtigen Spiel.", url: "https://fcbayern.com/de/news" },
+        { icon: "💪", title: "{player} zurück im Training", text: "Nach Verletzungspause kehrt der Star zurück ins Mannschaftstraining.", url: "https://fcbayern.com/de/news" },
+        { icon: "🎯", title: "Transfer-Update: Bayern beobachtet {talent}", text: "Laut Medienberichten ist der Verein an einem Youngster interessiert.", url: "https://fcbayern.com/de/news" }
+    ];
+    
+    const teams = ["Augsburg", "Freiburg", "Hoffenheim", "Union Berlin", "Wolfsburg"];
+    const players = ["Kane", "Müller", "Kimmich", "Musiala", "Sané"];
+    const tactics = ["Rotation", "neue Formation", "veränderte Taktik"];
+    const competitions = ["Champions League", "DFB-Pokal", "Bundesliga"];
+    const strategies = ["offensive Spielweise", "kompakte Defensive", "Ballbesitzfußball"];
+    const scores = ["3:1", "2:0", "4:2", "1:0", "3:0"];
+    const years = ["2027", "2028", "2029"];
+    const talents = ["spanisches Talent", "französischen Youngster", "brasilianisches Juwel"];
+    
+    return templates.map(template => {
+        let title = template.title
+            .replace('{score}', scores[Math.floor(Math.random() * scores.length)])
+            .replace('{team}', teams[Math.floor(Math.random() * teams.length)])
+            .replace('{player}', players[Math.floor(Math.random() * players.length)])
+            .replace('{year}', years[Math.floor(Math.random() * years.length)])
+            .replace('{tactic}', tactics[Math.floor(Math.random() * tactics.length)])
+            .replace('{competition}', competitions[Math.floor(Math.random() * competitions.length)])
+            .replace('{talent}', talents[Math.floor(Math.random() * talents.length)]);
+        
+        let text = template.text
+            .replace('{player}', players[Math.floor(Math.random() * players.length)])
+            .replace('{strategy}', strategies[Math.floor(Math.random() * strategies.length)]);
+        
+        return {
+            icon: template.icon,
+            title: title,
+            text: text,
+            url: template.url,
+            time: Math.floor(Math.random() * 12) + 1
+        };
+    });
+}
+
+function generateFodenNews() {
+    const templates = [
+        { icon: "⭐", title: "Foden glänzt bei City-Sieg gegen {team}", text: "{stat} - erneut überragend im Etihad Stadium!", url: "https://mancity.com" },
+        { icon: "🏴󠁧󠁢󠁥󠁮󐁧󠁿", title: "England-Nominierung: Foden im Kader", text: "Der Mittelfeldstar ist für die anstehenden Länderspiele nominiert.", url: "https://mancity.com" },
+        { icon: "💬", title: "Guardiola lobt Foden nach {performance}", text: "Der Trainer zeigt sich begeistert von der Entwicklung seines Schützlings.", url: "https://mancity.com" },
+        { icon: "📊", title: "Foden führt City-Statistik an", text: "{metric} - beste Werte aller Premier-League-Spieler im {month}.", url: "https://mancity.com" },
+        { icon: "🎥", title: "Interview: Foden über {topic}", text: "Der Star spricht offen über seine Ziele und Ambitionen.", url: "https://mancity.com" }
+    ];
+    
+    const teams = ["Arsenal", "Liverpool", "Chelsea", "Manchester United", "Tottenham"];
+    const stats = ["Zwei Tore und eine Vorlage", "Ein Tor und zwei Assists", "Drei Scorerpunkte"];
+    const performances = ["Gala-Vorstellung", "starker Leistung", "überragendem Spiel"];
+    const metrics = ["Die meisten Scorerpunkte", "Höchste Passgenauigkeit", "Meiste Torvorlagen"];
+    const months = ["Februar", "Januar", "Dezember"];
+    const topics = ["seine Ziele", "die Champions League", "die WM-Qualifikation"];
+    
+    return templates.map(template => {
+        let title = template.title
+            .replace('{team}', teams[Math.floor(Math.random() * teams.length)])
+            .replace('{performance}', performances[Math.floor(Math.random() * performances.length)])
+            .replace('{topic}', topics[Math.floor(Math.random() * topics.length)]);
+        
+        let text = template.text
+            .replace('{stat}', stats[Math.floor(Math.random() * stats.length)])
+            .replace('{metric}', metrics[Math.floor(Math.random() * metrics.length)])
+            .replace('{month}', months[Math.floor(Math.random() * months.length)]);
+        
+        return {
+            icon: template.icon,
+            title: title,
+            text: text,
+            url: template.url,
+            time: Math.floor(Math.random() * 8) + 1
+        };
+    });
+}
 
 // Tab Navigation
 const navButtons = document.querySelectorAll('.nav-btn');
@@ -109,11 +143,9 @@ navButtons.forEach(btn => {
     btn.addEventListener('click', () => {
         const targetTab = btn.dataset.tab;
         
-        // Remove active class from all
         navButtons.forEach(b => b.classList.remove('active'));
         tabContents.forEach(tc => tc.classList.remove('active'));
         
-        // Add active class to clicked
         btn.classList.add('active');
         document.getElementById(targetTab).classList.add('active');
     });
@@ -126,8 +158,11 @@ document.getElementById('refresh-btn').addEventListener('click', () => {
 
 // Load News
 function loadAllNews() {
-    loadNews('bayern-news-list', bayernNews);
-    loadNews('foden-news-list', fodenNews);
+    const bayernNewsData = generateBayernNews();
+    const fodenNewsData = generateFodenNews();
+    
+    loadNews('bayern-news-list', bayernNewsData);
+    loadNews('foden-news-list', fodenNewsData);
     loadDailyFacts();
 }
 
@@ -145,23 +180,23 @@ function loadNews(containerId, newsData) {
             <div class="news-content">
                 <h3>${item.title}</h3>
                 <p>${item.text}</p>
-                <div class="news-meta">vor ${Math.floor(Math.random() * 12) + 1} Stunden</div>
+                <div class="news-meta">vor ${item.time} Stunden</div>
             </div>
         `;
         container.appendChild(newsItem);
     });
 }
 
-// Daily Fact (basierend auf Datum)
+// Daily Fact (Random bei Refresh)
 function loadDailyFacts() {
-    const today = new Date();
-    const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+    const bayernResult = getRandomFact(bayernFacts, currentBayernFactIndex);
+    const fodenResult = getRandomFact(fodenFacts, currentFodenFactIndex);
     
-    const bayernFactIndex = dayOfYear % bayernFacts.length;
-    const fodenFactIndex = dayOfYear % fodenFacts.length;
+    currentBayernFactIndex = bayernResult.index;
+    currentFodenFactIndex = fodenResult.index;
     
-    document.getElementById('bayern-daily-fact').textContent = bayernFacts[bayernFactIndex];
-    document.getElementById('foden-daily-fact').textContent = fodenFacts[fodenFactIndex];
+    document.getElementById('bayern-daily-fact').textContent = bayernResult.fact;
+    document.getElementById('foden-daily-fact').textContent = fodenResult.fact;
 }
 
 // PWA Install Prompt
@@ -192,4 +227,4 @@ window.addEventListener('beforeinstallprompt', (e) => {
 // Initial Load
 loadAllNews();
 
-console.log('⚽ Phils Fußball App geladen!');
+console.log('⚽ Phils Fußball App geladen! Made with ❤️');
