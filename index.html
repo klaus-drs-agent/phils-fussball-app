@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#DC052D">
+    <title>Phils Fußball App</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" href="icon-192.png">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>⚽ Phils Fußball App</h1>
+            <button id="refresh-btn" class="refresh-btn">🔄</button>
+        </header>
+
+        <main class="content">
+            <!-- Bayern News -->
+            <div class="tab-content active" id="bayern-news">
+                <div class="section-title">
+                    <h2>🔴 FC Bayern München News</h2>
+                </div>
+                <div id="bayern-news-list" class="news-list">
+                    <div class="loading">Lade Nachrichten...</div>
+                </div>
+            </div>
+
+            <!-- Bayern Info -->
+            <div class="tab-content" id="bayern-info">
+                <div class="section-title">
+                    <h2>📊 FC Bayern München Info</h2>
+                </div>
+                <div class="info-card daily-fact">
+                    <h3>💡 Fakt des Tages</h3>
+                    <p id="bayern-daily-fact">Lade...</p>
+                </div>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h4>🏟️ Stadion</h4>
+                        <p><strong>Allianz Arena</strong><br>Kapazität: 75.000<br>Eröffnung: 2005</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>🏆 Erfolge</h4>
+                        <p><strong>33x</strong> Deutscher Meister<br><strong>20x</strong> DFB-Pokal<br><strong>6x</strong> Champions League</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>👕 Gegründet</h4>
+                        <p><strong>27. Februar 1900</strong><br>München, Deutschland</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>⭐ Rekorde</h4>
+                        <p>Längste Siegesserie: 19 Spiele<br>Meiste Tore/Saison: 101 (2013/14)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Foden News -->
+            <div class="tab-content" id="foden-news">
+                <div class="section-title">
+                    <h2>💙 Phil Foden News</h2>
+                </div>
+                <div id="foden-news-list" class="news-list">
+                    <div class="loading">Lade Nachrichten...</div>
+                </div>
+            </div>
+
+            <!-- Foden Info -->
+            <div class="tab-content" id="foden-info">
+                <div class="section-title">
+                    <h2>📊 Phil Foden Info</h2>
+                </div>
+                <div class="info-card daily-fact">
+                    <h3>💡 Fakt des Tages</h3>
+                    <p id="foden-daily-fact">Lade...</p>
+                </div>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h4>👤 Personal</h4>
+                        <p><strong>Geboren:</strong> 28. Mai 2000<br><strong>Geburtsort:</strong> Stockport, England<br><strong>Größe:</strong> 1,71 m</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>⚽ Position</h4>
+                        <p><strong>Offensives Mittelfeld</strong><br>Linker Flügel<br>Zentrales Mittelfeld</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>🏆 Erfolge</h4>
+                        <p><strong>5x</strong> Premier League<br><strong>2x</strong> FA Cup<br><strong>1x</strong> Champions League (2023)</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>📈 Karriere</h4>
+                        <p>Bei City seit: 2008 (Youth)<br>Profi-Debüt: 2017<br>Trikot-Nr: 47</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <nav class="bottom-nav">
+            <button class="nav-btn active" data-tab="bayern-news">
+                <span class="nav-icon">🔴</span>
+                <span class="nav-label">Bayern News</span>
+            </button>
+            <button class="nav-btn" data-tab="bayern-info">
+                <span class="nav-icon">📊</span>
+                <span class="nav-label">Bayern Info</span>
+            </button>
+            <button class="nav-btn" data-tab="foden-news">
+                <span class="nav-icon">💙</span>
+                <span class="nav-label">Foden News</span>
+            </button>
+            <button class="nav-btn" data-tab="foden-info">
+                <span class="nav-icon">⭐</span>
+                <span class="nav-label">Foden Info</span>
+            </button>
+        </nav>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
