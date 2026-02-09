@@ -6,7 +6,7 @@ if ('serviceWorker' in navigator) {
 }
 
 // News API Server (HTTPS via Cloudflare Tunnel)
-const NEWS_API_BASE = 'https://express-artificial-taxation-articles.trycloudflare.com/api';
+const NEWS_API_BASE = 'https://girls-prospects-journals-visual.trycloudflare.com/api';
 
 // Bayern München Daily Facts
 const bayernFacts = [
