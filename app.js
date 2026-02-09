@@ -5,8 +5,8 @@ if ('serviceWorker' in navigator) {
         .catch(err => console.log('SW Error:', err));
 }
 
-// News API Server
-const NEWS_API_BASE = 'http://49.13.147.6:3001/api';
+// News API Server (HTTPS via Cloudflare Tunnel)
+const NEWS_API_BASE = 'https://analysis-thread-manufacturer-paragraph.trycloudflare.com/api';
 
 // Bayern München Daily Facts
 const bayernFacts = [
