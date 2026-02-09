@@ -2,7 +2,7 @@
   "name": "Phils Fußball App",
   "short_name": "Fußball App",
   "description": "FC Bayern München & Phil Foden News und Infos",
-  "start_url": "/",
+  "start_url": "/phils-fussball-app/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#6CABDD",
