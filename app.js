@@ -5,6 +5,9 @@ if ('serviceWorker' in navigator) {
         .catch(err => console.log('SW Error:', err));
 }
 
+// News API Server
+const NEWS_API_BASE = 'http://49.13.147.6:3001/api';
+
 // Bayern München Daily Facts
 const bayernFacts = [
     "Der FC Bayern wurde 1900 gegründet und ist damit einer der ältesten Vereine Deutschlands.",
@@ -55,86 +58,6 @@ function getRandomFact(factsArray, currentIndex) {
     return { fact: factsArray[newIndex], index: newIndex };
 }
 
-// Dynamic News Generation (simulated - würde im echten Szenario via API laufen)
-function generateBayernNews() {
-    const templates = [
-        { icon: "⚽", title: "Bayern gewinnt {score} gegen {team}", text: "Souveräner Heimsieg in der Allianz Arena. {player} mit starker Leistung.", url: "https://fcbayern.com/de/news" },
-        { icon: "🏆", title: "{player} verlängert Vertrag bis {year}", text: "Der Verein freut sich über die langfristige Bindung des Leistungsträgers.", url: "https://fcbayern.com/de/news" },
-        { icon: "📰", title: "Tuchel plant {tactic} für {competition}", text: "Der Trainer setzt auf {strategy} im wichtigen Spiel.", url: "https://fcbayern.com/de/news" },
-        { icon: "💪", title: "{player} zurück im Training", text: "Nach Verletzungspause kehrt der Star zurück ins Mannschaftstraining.", url: "https://fcbayern.com/de/news" },
-        { icon: "🎯", title: "Transfer-Update: Bayern beobachtet {talent}", text: "Laut Medienberichten ist der Verein an einem Youngster interessiert.", url: "https://fcbayern.com/de/news" }
-    ];
-    
-    const teams = ["Augsburg", "Freiburg", "Hoffenheim", "Union Berlin", "Wolfsburg"];
-    const players = ["Kane", "Müller", "Kimmich", "Musiala", "Sané"];
-    const tactics = ["Rotation", "neue Formation", "veränderte Taktik"];
-    const competitions = ["Champions League", "DFB-Pokal", "Bundesliga"];
-    const strategies = ["offensive Spielweise", "kompakte Defensive", "Ballbesitzfußball"];
-    const scores = ["3:1", "2:0", "4:2", "1:0", "3:0"];
-    const years = ["2027", "2028", "2029"];
-    const talents = ["spanisches Talent", "französischen Youngster", "brasilianisches Juwel"];
-    
-    return templates.map(template => {
-        let title = template.title
-            .replace('{score}', scores[Math.floor(Math.random() * scores.length)])
-            .replace('{team}', teams[Math.floor(Math.random() * teams.length)])
-            .replace('{player}', players[Math.floor(Math.random() * players.length)])
-            .replace('{year}', years[Math.floor(Math.random() * years.length)])
-            .replace('{tactic}', tactics[Math.floor(Math.random() * tactics.length)])
-            .replace('{competition}', competitions[Math.floor(Math.random() * competitions.length)])
-            .replace('{talent}', talents[Math.floor(Math.random() * talents.length)]);
-        
-        let text = template.text
-            .replace('{player}', players[Math.floor(Math.random() * players.length)])
-            .replace('{strategy}', strategies[Math.floor(Math.random() * strategies.length)]);
-        
-        return {
-            icon: template.icon,
-            title: title,
-            text: text,
-            url: template.url,
-            time: Math.floor(Math.random() * 12) + 1
-        };
-    });
-}
-
-function generateFodenNews() {
-    const templates = [
-        { icon: "⭐", title: "Foden glänzt bei City-Sieg gegen {team}", text: "{stat} - erneut überragend im Etihad Stadium!", url: "https://mancity.com" },
-        { icon: "🏴󠁧󠁢󠁥󠁮󐁧󠁿", title: "England-Nominierung: Foden im Kader", text: "Der Mittelfeldstar ist für die anstehenden Länderspiele nominiert.", url: "https://mancity.com" },
-        { icon: "💬", title: "Guardiola lobt Foden nach {performance}", text: "Der Trainer zeigt sich begeistert von der Entwicklung seines Schützlings.", url: "https://mancity.com" },
-        { icon: "📊", title: "Foden führt City-Statistik an", text: "{metric} - beste Werte aller Premier-League-Spieler im {month}.", url: "https://mancity.com" },
-        { icon: "🎥", title: "Interview: Foden über {topic}", text: "Der Star spricht offen über seine Ziele und Ambitionen.", url: "https://mancity.com" }
-    ];
-    
-    const teams = ["Arsenal", "Liverpool", "Chelsea", "Manchester United", "Tottenham"];
-    const stats = ["Zwei Tore und eine Vorlage", "Ein Tor und zwei Assists", "Drei Scorerpunkte"];
-    const performances = ["Gala-Vorstellung", "starker Leistung", "überragendem Spiel"];
-    const metrics = ["Die meisten Scorerpunkte", "Höchste Passgenauigkeit", "Meiste Torvorlagen"];
-    const months = ["Februar", "Januar", "Dezember"];
-    const topics = ["seine Ziele", "die Champions League", "die WM-Qualifikation"];
-    
-    return templates.map(template => {
-        let title = template.title
-            .replace('{team}', teams[Math.floor(Math.random() * teams.length)])
-            .replace('{performance}', performances[Math.floor(Math.random() * performances.length)])
-            .replace('{topic}', topics[Math.floor(Math.random() * topics.length)]);
-        
-        let text = template.text
-            .replace('{stat}', stats[Math.floor(Math.random() * stats.length)])
-            .replace('{metric}', metrics[Math.floor(Math.random() * metrics.length)])
-            .replace('{month}', months[Math.floor(Math.random() * months.length)]);
-        
-        return {
-            icon: template.icon,
-            title: title,
-            text: text,
-            url: template.url,
-            time: Math.floor(Math.random() * 8) + 1
-        };
-    });
-}
-
 // Tab Navigation
 const navButtons = document.querySelectorAll('.nav-btn');
 const tabContents = document.querySelectorAll('.tab-content');
@@ -156,10 +79,51 @@ document.getElementById('refresh-btn').addEventListener('click', () => {
     loadAllNews();
 });
 
-// Load News
-function loadAllNews() {
-    const bayernNewsData = generateBayernNews();
-    const fodenNewsData = generateFodenNews();
+// Fetch Real News from API
+async function fetchBayernNews() {
+    try {
+        const response = await fetch(`${NEWS_API_BASE}/bayern-news`);
+        if (!response.ok) throw new Error('API Error');
+        return await response.json();
+    } catch (error) {
+        console.error('Bayern News Error:', error);
+        return getFallbackBayernNews();
+    }
+}
+
+async function fetchFodenNews() {
+    try {
+        const response = await fetch(`${NEWS_API_BASE}/foden-news`);
+        if (!response.ok) throw new Error('API Error');
+        return await response.json();
+    } catch (error) {
+        console.error('Foden News Error:', error);
+        return getFallbackFodenNews();
+    }
+}
+
+// Fallback News (falls API nicht erreichbar)
+function getFallbackBayernNews() {
+    return [
+        { icon: "⚽", title: "Bayern News werden geladen...", text: "Bitte überprüfe deine Internetverbindung.", url: "https://fcbayern.com", time: 0 }
+    ];
+}
+
+function getFallbackFodenNews() {
+    return [
+        { icon: "⭐", title: "Foden News werden geladen...", text: "Bitte überprüfe deine Internetverbindung.", url: "https://mancity.com", time: 0 }
+    ];
+}
+
+// Load All News
+async function loadAllNews() {
+    document.getElementById('bayern-news-list').innerHTML = '<div class="loading">Lade Bayern News...</div>';
+    document.getElementById('foden-news-list').innerHTML = '<div class="loading">Lade Foden News...</div>';
+    
+    const [bayernNewsData, fodenNewsData] = await Promise.all([
+        fetchBayernNews(),
+        fetchFodenNews()
+    ]);
     
     loadNews('bayern-news-list', bayernNewsData);
     loadNews('foden-news-list', fodenNewsData);
