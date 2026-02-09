@@ -6,7 +6,7 @@ if ('serviceWorker' in navigator) {
 }
 
 // News API Server (HTTPS via Cloudflare Tunnel)
-const NEWS_API_BASE = 'https://sword-bent-marketplace-hollow.trycloudflare.com/api';
+const NEWS_API_BASE = 'https://utilization-gif-lindsay-cams.trycloudflare.com/api';
 
 // Bayern München Daily Facts
 const bayernFacts = [
